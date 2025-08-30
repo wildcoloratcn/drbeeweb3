@@ -39,3 +39,25 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# foundry / solidity
+packages/contracts/cache/
+packages/contracts/out/
+packages/contracts/broadcast/
+packages/contracts/lib/
+packages/contracts/*.lock
+packages/contracts/.gas-snapshot
+packages/contracts/typechain/
+packages/contracts/typechain-types/
+
+# IPFS images (slow network)
+packages/ipfs_images/images/
+packages/ipfs_images/*.png
+packages/ipfs_images/*.jpg
+packages/ipfs_images/*.jpeg
+packages/ipfs_images/*.gif
+packages/ipfs_images/*.svg
+
+# IDE
+.vscode/
+.idea/
