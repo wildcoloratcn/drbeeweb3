@@ -1,0 +1,10 @@
+{
+    "name": "DrBEE #2",
+    "description": "A special cartoon bee from the DrBEE NFT collection.",
+    "image": "ipfs://bafybeiclc5um24aicehsk6wm4gz5v3poklsmf5bo6ffdubarrp6aebhps4/2.png",
+    "attributes": [
+      { "trait_type": "Species", "value": "Founders Club Bee" },
+      { "trait_type": "Mood", "value": "Happy" }
+    ]
+  }
+  

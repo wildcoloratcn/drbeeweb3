@@ -1,0 +1,10 @@
+{
+    "name": "DrBEE #1",
+    "description": "A cartoon bee from the DrBEE NFT collection.",
+    "image": "ipfs://bafybeifq6t5kmmjvhscj2rtxdpibo6ca57kjrqu3tbpgen3aqvha74vegi",
+    "attributes": [
+      { "trait_type": "Species", "value": "Bee" },
+      { "trait_type": "Mood", "value": "Happy" }
+    ]
+  }
+  
