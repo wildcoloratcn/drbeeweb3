@@ -2,6 +2,11 @@
 
 <div align="center">
 
+<div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1)); padding: 20px; border-radius: 15px; border: 1px solid rgba(139, 92, 246, 0.2);">
+  <img src="./public/logo.png" alt="DrBEE Logo" width="80" height="80" style="margin-right: 15px; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));" />
+  <h1 style="font-size: 2.5em; margin: 0; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: bold;">🐝 DrBEE</h1>
+</div>
+
 ![DrBEE Homepage](./screenshots/aibee_homepage.png)
 
 <h3>🍯 Complete Web3 DeFi Platform</h3>
