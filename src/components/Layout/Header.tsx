@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ConnectWallet } from "../Common/ConnectWallet";
-import { Coins, Gift, Image, TrendingUp, Zap, Info } from "lucide-react";
+import { Coins, Gift, Image, TrendingUp, Info } from "lucide-react";
 
 export const Header: React.FC = () => {
   return (
@@ -9,12 +9,16 @@ export const Header: React.FC = () => {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-3">
           <div className="relative">
-            <div className="w-10 h-10 purple-gradient rounded-full flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
+              <img 
+                src="./logo.png" 
+                alt="DrBEE Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
           </div>
-          <span className="text-2xl font-bold text-gradient">DrBEE</span>
+          <span className="text-2xl font-bold text-gradient">AIBEE</span>
         </Link>
         
         <nav className="hidden md:flex space-x-2">

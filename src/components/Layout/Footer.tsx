@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
         <div className="mt-4 flex justify-center space-x-4">
           <a href="#" className="hover:text-yellow-400">Terms</a>
           <a href="#" className="hover:text-yellow-400">Privacy</a>
-          <a href="#" className="hover:text-yellow-400">Docs</a>
+          <a href="/about" className="hover:text-yellow-400">About</a>
         </div>
       </div>
     </footer>

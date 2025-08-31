@@ -3,8 +3,7 @@
 <div align="center">
 
 <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1)); padding: 20px; border-radius: 15px; border: 1px solid rgba(139, 92, 246, 0.2);">
-  <img src="./public/logo.png" alt="DrBEE Logo" width="80" height="80" style="margin-right: 15px; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));" />
-  <h1 style="font-size: 2.5em; margin: 0; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: bold;">🐝 DrBEE</h1>
+  <h1 style="font-size: 2.5em; margin: 0; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: bold;">🐝 AIBEE</h1>
 </div>
 
 ![DrBEE Homepage](./screenshots/aibee_homepage.png)
@@ -14,10 +13,11 @@
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-aibee.netlify.app-blue?style=for-the-badge)](https://aibee.netlify.app)
 [![Built with Next.js](https://img.shields.io/badge/Built_with-Next.js_15-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![Deployed on Netlify](https://img.shields.io/badge/Deployed_on-Netlify-00C7B7?style=for-the-badge&logo=netlify)](https://netlify.com)
-[![Powered by Ethereum](https://img.shields.io/badge/Powered_by-Ethereum_Sepolia-627EEA?style=for-the-badge&logo=ethereum)](https://ethereum.org)
 
+[![Powered by Ethereum](https://img.shields.io/badge/Powered_by-Ethereum_Sepolia-627EEA?style=for-the-badge&logo=ethereum)](https://ethereum.org)
 [![Foundry](https://img.shields.io/badge/Built_with-Foundry-FFF100?style=for-the-badge&logo=ethereum)](https://getfoundry.sh)
 [![OpenZeppelin](https://img.shields.io/badge/Secured_by-OpenZeppelin-4E4E4E?style=for-the-badge)](https://openzeppelin.com)
+
 [![TailwindCSS](https://img.shields.io/badge/Styled_with-TailwindCSS_4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com)
 [![Wagmi](https://img.shields.io/badge/Web3-Wagmi_%2B_RainbowKit-FF6B6B?style=for-the-badge&logo=ethereum)](https://wagmi.sh)
 [![RainbowKit](https://img.shields.io/badge/Web3_UI-RainbowKit-FF6B6B?style=for-the-badge&logo=ethereum)](https://rainbowkit.com)
@@ -58,13 +58,7 @@ DrBEE aims to establish a self-sustaining blockchain ecosystem where users can p
 
 </div>
 
-**Mathematical Details:**
-```
-Annual Percentage Yield = 80% APY
-Per-Second Interest Rate = 80% ÷ (365 × 24 × 3600) = 0.00000002537
-Interest = Principal × Time(seconds) × Per-Second Rate
-Real-Time Compounding = Auto-reinvestment of accrued interest on additional stakes
-```
+
 
 **Key Features:**
 - 🚀 **Per-Second Updates**: Interest calculated every second, not daily/monthly
