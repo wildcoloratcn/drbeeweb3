@@ -175,39 +175,7 @@ export default function VaultPage() {
         </ul>
       </Card>
 
-      {/* 调试面板 */}
-      <Card>
-        <h2 className="text-xl font-semibold mb-4">Debug Info</h2>
-        <div className="space-y-2 text-sm">
-          <div>Address: {address || "Not connected"}</div>
-          <div>Is Connected: {isConnected ? "Yes" : "No"}</div>
-          <div>Chain ID: {chainId}</div>
-          <div>Loading: {loading ? "Yes" : "No"}</div>
-          <div>Is Pending: {isPending ? "Yes" : "No"}</div>
-          <div>Is Success: {isSuccess ? "Yes" : "No"}</div>
-          <div>Error: {error?.message || "None"}</div>
-          <div>Can Claim: {vaultInfo?.canClaim ? "Yes" : "No"}</div>
-          <div>Vault Info: {vaultInfo ? "Loaded" : "Loading..."}</div>
-          {vaultInfo && (
-            <div className="mt-4 p-2 bg-gray-100 rounded text-xs">
-              <div>Claim Amount: {vaultInfo.claimAmount}</div>
-              <div>Cooldown: {vaultInfo.cooldown}s</div>
-              <div>Last Claim: {vaultInfo.lastClaim}</div>
-              <div>Next Claim: {new Date(vaultInfo.nextClaimTime).toLocaleString()}</div>
-            </div>
-          )}
-        </div>
-        
-        <div className="mt-4">
-          <Button 
-            onClick={() => console.log("🔍 Manual debug trigger")} 
-            className="w-full"
-            variant="secondary"
-          >
-            Print Debug Info to Console
-          </Button>
-        </div>
-      </Card>
+
     </div>
   );
 }

@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useStaking } from "@/hooks/useStaking";
 import { Card } from "@/components/UI/Card";
 import { Button } from "@/components/UI/Button";
 import { LoadingSpinner } from "@/components/Common/LoadingSpinner";
 import { TransactionStatus } from "@/components/Common/TransactionStatus";
-import { formatEther } from "viem";
+import { formatEther, parseEther } from "viem";
 
 export default function StakingPage() {
   const { 
@@ -24,6 +25,10 @@ export default function StakingPage() {
   const [stakeAmount, setStakeAmount] = useState("");
   const [step, setStep] = useState<"approve" | "stake">("approve");
   const [countdown, setCountdown] = useState(30);
+
+  // Check if user has enough BEE for staking
+  const hasEnoughBee = stakingInfo && stakeAmount ? 
+    BigInt(stakingInfo.beeBalance) >= parseEther(stakeAmount) : true;
 
   const handleApprove = () => {
     if (!stakeAmount) return;
@@ -60,8 +65,9 @@ export default function StakingPage() {
     if (isSuccess) {
       setStakeAmount("");
       setStep("approve");
-      // Reset countdown
+      // Reset countdown to show fresh interest calculation
       setCountdown(30);
+      console.log("✅ Staking transaction completed! Data will refresh automatically.");
     }
   }, [isSuccess]);
 
@@ -87,6 +93,10 @@ export default function StakingPage() {
           <div className="space-y-4">
             <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg border">
               <div className="flex justify-between items-center mb-2">
+                <span className="font-semibold">Your BEE Balance:</span>
+                <span className="font-bold text-lg">{formatEther(BigInt(stakingInfo.beeBalance))} BEE</span>
+              </div>
+              <div className="flex justify-between items-center mb-2">
                 <span className="font-semibold">Your Staked Amount:</span>
                 <span className="font-bold text-lg">{formatEther(BigInt(stakingInfo.stakedAmount))} BEE</span>
               </div>
@@ -97,7 +107,7 @@ export default function StakingPage() {
                 </span>
               </div>
               <div className="flex justify-between items-center mb-3">
-                <span className="text-sm text-gray-600">Next refresh in:</span>
+                <span className="text-sm text-gray-600">Interest calculated in:</span>
                 <span className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
                   {countdown}s
                 </span>
@@ -109,6 +119,38 @@ export default function StakingPage() {
                 ></div>
               </div>
             </div>
+
+            {/* Vault Information */}
+            {stakingInfo.vaultInfo && (
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg border">
+                <h3 className="font-semibold text-blue-800 mb-2">💰 Daily Claim Status</h3>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-sm text-gray-600">Last Claim:</span>
+                  <span className="text-sm font-mono">
+                    {stakingInfo.vaultInfo.lastClaimTime > 0 ? 
+                      new Date(stakingInfo.vaultInfo.lastClaimTime).toLocaleString() : 
+                      "Never"
+                    }
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Next Claim:</span>
+                  <span className="text-sm font-mono">
+                    {stakingInfo.vaultInfo.canClaim ? (
+                      <span className="text-green-600 font-semibold">Available Now!</span>
+                    ) : (
+                      <span>
+                        {new Date(stakingInfo.vaultInfo.nextClaimTime).toLocaleString()}
+                        <br />
+                        <span className="text-xs text-gray-500">
+                          ({Math.ceil(stakingInfo.vaultInfo.timeUntilNextClaim / (1000 * 60 * 60))} hours left)
+                        </span>
+                      </span>
+                    )}
+                  </span>
+                </div>
+              </div>
+            )}
             
             <div className="flex justify-between">
               <span>Total Staked (Platform):</span>
@@ -121,7 +163,10 @@ export default function StakingPage() {
                 isSuccess ? "success" : 
                 error ? "error" : "idle"
               } 
-              message={error?.message || ""} 
+              message={
+                isSuccess ? "Transaction successful! Your staked amount and interest are updating..." :
+                error?.message || ""
+              } 
             />
 
             <div className="space-y-2">
@@ -130,10 +175,27 @@ export default function StakingPage() {
                 value={stakeAmount}
                 onChange={(e) => setStakeAmount(e.target.value)}
                 placeholder="Amount to stake"
-                className="w-full p-2 border rounded"
+                className={`w-full p-2 border rounded ${!hasEnoughBee && stakeAmount ? 'border-red-300 bg-red-50' : ''}`}
               />
+
+              {!hasEnoughBee && stakeAmount && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                  <p className="text-red-700 text-sm mb-2">
+                    ⚠️ Insufficient BEE balance. You need {stakeAmount} BEE but only have {formatEther(BigInt(stakingInfo?.beeBalance || "0"))} BEE.
+                  </p>
+                  <p className="text-red-600 text-sm">
+                    💡 Get free BEE tokens: {" "}
+                    <Link 
+                      href="/vault" 
+                      className="underline font-semibold hover:text-red-800 transition-colors"
+                    >
+                      Claim 100 BEE daily →
+                    </Link>
+                  </p>
+                </div>
+              )}
               
-              {step === "approve" && (
+              {step === "approve" && hasEnoughBee && (
                 <Button 
                   onClick={handleApprove} 
                   disabled={!stakeAmount || isPending || isConfirming} 
@@ -143,7 +205,16 @@ export default function StakingPage() {
                 </Button>
               )}
 
-              {step === "stake" && approveSuccess && (
+              {step === "approve" && !hasEnoughBee && stakeAmount && (
+                <Button 
+                  disabled={true}
+                  className="w-full opacity-50 cursor-not-allowed"
+                >
+                  Insufficient BEE Balance
+                </Button>
+              )}
+
+              {step === "stake" && approveSuccess && hasEnoughBee && (
                 <Button 
                   onClick={handleExecuteStake} 
                   disabled={!stakeAmount || isPending || isConfirming} 

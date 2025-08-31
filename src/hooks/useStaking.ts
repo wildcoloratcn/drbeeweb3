@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import { STAKING_ABI, BEE_TOKEN_ABI } from "@/utils/contracts";
+import { STAKING_ABI, BEE_TOKEN_ABI, VAULT_ABI } from "@/utils/contracts";
 import { CONTRACT_ADDRESSES, CHAIN_ID } from "@/utils/constants";
 import { StakingInfo } from "@/types";
 import { parseEther } from "viem";
@@ -11,7 +11,12 @@ export const useStaking = () => {
   const [loading, setLoading] = useState(true);
 
   // Read contract states with auto-refresh every 30 seconds
-  const { data: stakeData, isLoading: stakeDataLoading, error: stakeDataError } = useReadContract({
+  const { 
+    data: stakeData, 
+    isLoading: stakeDataLoading, 
+    error: stakeDataError,
+    refetch: refetchStakeData 
+  } = useReadContract({
     address: CONTRACT_ADDRESSES.STAKING as `0x${string}`,
     abi: STAKING_ABI,
     functionName: 'stakes',
@@ -22,7 +27,11 @@ export const useStaking = () => {
     },
   });
 
-  const { data: totalStaked, isLoading: totalStakedLoading } = useReadContract({
+  const { 
+    data: totalStaked, 
+    isLoading: totalStakedLoading,
+    refetch: refetchTotalStaked 
+  } = useReadContract({
     address: CONTRACT_ADDRESSES.STAKING as `0x${string}`,
     abi: STAKING_ABI,
     functionName: 'totalStaked',
@@ -32,11 +41,53 @@ export const useStaking = () => {
     },
   });
 
-  const { data: interestEarned, isLoading: interestEarnedLoading } = useReadContract({
+  const { 
+    data: interestEarned, 
+    isLoading: interestEarnedLoading,
+    refetch: refetchInterestEarned 
+  } = useReadContract({
     address: CONTRACT_ADDRESSES.STAKING as `0x${string}`,
     abi: STAKING_ABI,
     functionName: 'calculateInterest',
     args: address ? [address] : undefined,
+    chainId: CHAIN_ID,
+    query: {
+      refetchInterval: 30000, // Refresh every 30 seconds
+    },
+  });
+
+  // Read BEE token balance
+  const { 
+    data: beeBalance, 
+    isLoading: beeBalanceLoading,
+    refetch: refetchBeeBalance 
+  } = useReadContract({
+    address: CONTRACT_ADDRESSES.BEE_TOKEN as `0x${string}`,
+    abi: BEE_TOKEN_ABI,
+    functionName: 'balanceOf',
+    args: address ? [address] : undefined,
+    chainId: CHAIN_ID,
+    query: {
+      refetchInterval: 30000, // Refresh every 30 seconds
+    },
+  });
+
+  // Read vault information
+  const { data: lastClaim, isLoading: lastClaimLoading } = useReadContract({
+    address: CONTRACT_ADDRESSES.VAULT as `0x${string}`,
+    abi: VAULT_ABI,
+    functionName: 'lastClaim',
+    args: address ? [address] : undefined,
+    chainId: CHAIN_ID,
+    query: {
+      refetchInterval: 30000, // Refresh every 30 seconds
+    },
+  });
+
+  const { data: cooldown, isLoading: cooldownLoading } = useReadContract({
+    address: CONTRACT_ADDRESSES.VAULT as `0x${string}`,
+    abi: VAULT_ABI,
+    functionName: 'cooldown',
     chainId: CHAIN_ID,
     query: {
       refetchInterval: 30000, // Refresh every 30 seconds
@@ -78,9 +129,28 @@ export const useStaking = () => {
     hash: withdrawHash,
   });
 
+  // Calculate vault info
+  const calculateVaultInfo = () => {
+    if (!lastClaim || !cooldown) return null;
+    
+    const lastClaimTime = Number(lastClaim) * 1000; // Convert to milliseconds
+    const cooldownMs = Number(cooldown) * 1000; // Convert to milliseconds
+    const nextClaimTime = lastClaimTime + cooldownMs;
+    const now = Date.now();
+    const canClaim = now >= nextClaimTime;
+    
+    return {
+      lastClaimTime,
+      nextClaimTime,
+      canClaim,
+      timeUntilNextClaim: canClaim ? 0 : Math.max(0, nextClaimTime - now),
+    };
+  };
+
   // Update staking info when data changes
   useEffect(() => {
-    const allLoading = stakeDataLoading || totalStakedLoading || interestEarnedLoading;
+    const allLoading = stakeDataLoading || totalStakedLoading || interestEarnedLoading || 
+                      beeBalanceLoading || lastClaimLoading || cooldownLoading;
     
     if (!allLoading && address) {
       if (stakeDataError) {
@@ -94,12 +164,40 @@ export const useStaking = () => {
         startTime: stakeData ? Number(stakeData[1]) : 0,
         interestEarned: interestEarned?.toString() || "0",
         totalStaked: totalStaked?.toString() || "0",
+        beeBalance: beeBalance?.toString() || "0",
+        vaultInfo: calculateVaultInfo(),
       });
       setLoading(false);
     } else if (!address) {
       setLoading(false);
     }
-  }, [stakeData, totalStaked, interestEarned, stakeDataLoading, totalStakedLoading, interestEarnedLoading, address, stakeDataError]);
+  }, [stakeData, totalStaked, interestEarned, beeBalance, lastClaim, cooldown,
+      stakeDataLoading, totalStakedLoading, interestEarnedLoading, beeBalanceLoading, 
+      lastClaimLoading, cooldownLoading, address, stakeDataError]);
+
+  // 监听 stake 成功，立即刷新数据
+  useEffect(() => {
+    if (stakeSuccess) {
+      console.log("🎉 Stake successful! Refreshing staking data...");
+      // 立即刷新所有相关数据
+      refetchStakeData();
+      refetchTotalStaked();
+      refetchInterestEarned();
+      refetchBeeBalance();
+    }
+  }, [stakeSuccess, refetchStakeData, refetchTotalStaked, refetchInterestEarned, refetchBeeBalance]);
+
+  // 监听 withdraw 成功，立即刷新数据
+  useEffect(() => {
+    if (withdrawSuccess) {
+      console.log("💰 Withdraw successful! Refreshing staking data...");
+      // 立即刷新所有相关数据
+      refetchStakeData();
+      refetchTotalStaked();
+      refetchInterestEarned();
+      refetchBeeBalance();
+    }
+  }, [withdrawSuccess, refetchStakeData, refetchTotalStaked, refetchInterestEarned, refetchBeeBalance]);
 
   const stake = (amount: string) => {
     if (!address) return;

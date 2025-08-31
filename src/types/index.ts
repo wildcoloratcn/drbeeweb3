@@ -11,6 +11,13 @@ export interface VaultInfo {
     startTime: number;
     interestEarned: string;
     totalStaked: string;
+    beeBalance: string;
+    vaultInfo: {
+      lastClaimTime: number;
+      nextClaimTime: number;
+      canClaim: boolean;
+      timeUntilNextClaim: number;
+    } | null;
   }
   
   export interface NFTInfo {
@@ -18,4 +25,6 @@ export interface VaultInfo {
     minted: number;
     mintPrice: string;
     userBalance: number;
+    beeBalance: string;
+    allowance: string;
   }
