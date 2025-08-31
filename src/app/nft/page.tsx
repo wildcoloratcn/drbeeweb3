@@ -29,10 +29,12 @@ export default function NFTPage() {
   const [lastMintSuccess, setLastMintSuccess] = useState(false);
 
   const handleApprove = () => {
+    console.log("🔄 User clicked Approve");
     approve();
   };
 
   const handleMint = () => {
+    console.log("🔄 User clicked Mint");
     mint();
   };
 
@@ -58,10 +60,10 @@ export default function NFTPage() {
       console.log("🎉 NFT Mint transaction successful!");
       setLastMintSuccess(true);
       
-      // 3秒后重置状态，为下次 mint 做准备
+      // 2秒后重置状态，为下次操作做准备
       setTimeout(() => {
         setLastMintSuccess(false);
-      }, 3000);
+      }, 2000);
     }
   }, [isSuccess, lastMintSuccess]);
 
@@ -141,8 +143,16 @@ export default function NFTPage() {
                 isSuccess ? "success" : 
                 error ? "error" : "idle"
               } 
-              message={error?.message || ""} 
+              message={
+                isPending ? "Processing approval..." :
+                isConfirming ? "Minting NFT..." :
+                isSuccess && lastMintSuccess ? "🎉 NFT minted successfully!" :
+                isSuccess && approveSuccess ? "✅ BEE approval confirmed! You can now mint your NFT." :
+                error?.message || ""
+              } 
             />
+
+
 
             {/* 余额不足的情况 */}
             {!hasEnoughBee && (
@@ -154,54 +164,35 @@ export default function NFTPage() {
               </Button>
             )}
 
-            {/* 有足够余额的情况 */}
+            {/* 有足够余额的情况 - 始终显示两个按钮 */}
             {hasEnoughBee && (
               <div className="space-y-2">
-                {/* 需要 approve 且还没有 approve 成功 */}
-                {needsApproval && !approveSuccess && (
-                  <Button
-                    onClick={handleApprove}
-                    disabled={isPending || isConfirming}
-                    className="w-full"
-                  >
-                    {isPending ? "Approving..." : "1. Approve BEE"}
-                  </Button>
-                )}
+                {/* 1. Approve按钮 - 始终显示 */}
+                <Button
+                  onClick={handleApprove}
+                  disabled={!needsApproval || isPending || isConfirming}
+                  className={`w-full ${!needsApproval ? 'opacity-50' : ''}`}
+                >
+                  1. Approve BEE
+                </Button>
 
-                {/* approve 成功了，显示已批准状态 */}
-                {needsApproval && approveSuccess && !lastMintSuccess && (
-                  <>
-                    <Button
-                      disabled={true}
-                      className="w-full bg-green-100 text-green-800 cursor-not-allowed"
-                    >
-                      ✅ BEE Approved
-                    </Button>
-                    <Button
-                      onClick={handleMint}
-                      disabled={nftInfo.minted >= nftInfo.totalSupply || isPending || isConfirming}
-                      className="w-full"
-                    >
-                      {isPending ? "Confirming..." : isConfirming ? "Minting..." : "2. Mint NFT"}
-                    </Button>
-                    <div className="text-sm text-gray-600 text-center">
-                      ✅ BEE approval confirmed. Click &ldquo;Mint NFT&rdquo; to complete.
-                    </div>
-                  </>
-                )}
+                {/* 2. Mint按钮 - 始终显示 */}
+                <Button
+                  onClick={handleMint}
+                  disabled={needsApproval || nftInfo.minted >= nftInfo.totalSupply || isPending || isConfirming}
+                  className={`w-full ${needsApproval ? 'opacity-50' : ''}`}
+                >
+                  2. Mint NFT
+                </Button>
 
-                {/* 不需要 approve 或者 mint 刚成功 */}
-                {(!needsApproval || lastMintSuccess) && (
-                  <Button
-                    onClick={handleMint}
-                    disabled={nftInfo.minted >= nftInfo.totalSupply || isPending || isConfirming || lastMintSuccess}
-                    className={`w-full ${lastMintSuccess ? 'bg-green-100 text-green-800' : ''}`}
-                  >
-                    {lastMintSuccess ? "✅ NFT Minted Successfully!" : 
-                     isPending ? "Confirming..." : 
-                     isConfirming ? "Minting..." : "Mint NFT"}
-                  </Button>
-                )}
+                {/* 简单的状态提示 */}
+                <div className="text-center text-sm text-gray-600">
+                  {needsApproval ? (
+                    "Step 1: Approve BEE tokens first"
+                  ) : (
+                    "Step 2: Ready to mint your NFT!"
+                  )}
+                </div>
               </div>
             )}
           </div>

@@ -23,7 +23,7 @@ export const useStaking = () => {
     args: address ? [address] : undefined,
     chainId: CHAIN_ID,
     query: {
-      refetchInterval: 30000, // Refresh every 30 seconds
+      refetchInterval: 5000, // Refresh every 5 seconds
     },
   });
 
@@ -37,7 +37,7 @@ export const useStaking = () => {
     functionName: 'totalStaked',
     chainId: CHAIN_ID,
     query: {
-      refetchInterval: 30000, // Refresh every 30 seconds
+      refetchInterval: 5000, // Refresh every 5 seconds
     },
   });
 
@@ -52,7 +52,7 @@ export const useStaking = () => {
     args: address ? [address] : undefined,
     chainId: CHAIN_ID,
     query: {
-      refetchInterval: 30000, // Refresh every 30 seconds
+      refetchInterval: 5000, // Refresh every 5 seconds
     },
   });
 
@@ -68,7 +68,7 @@ export const useStaking = () => {
     args: address ? [address] : undefined,
     chainId: CHAIN_ID,
     query: {
-      refetchInterval: 30000, // Refresh every 30 seconds
+      refetchInterval: 5000, // Refresh every 5 seconds
     },
   });
 
@@ -80,7 +80,7 @@ export const useStaking = () => {
     args: address ? [address] : undefined,
     chainId: CHAIN_ID,
     query: {
-      refetchInterval: 30000, // Refresh every 30 seconds
+      refetchInterval: 5000, // Refresh every 5 seconds
     },
   });
 
@@ -90,7 +90,7 @@ export const useStaking = () => {
     functionName: 'cooldown',
     chainId: CHAIN_ID,
     query: {
-      refetchInterval: 30000, // Refresh every 30 seconds
+      refetchInterval: 5000, // Refresh every 5 seconds
     },
   });
 
@@ -245,6 +245,13 @@ export const useStaking = () => {
     stake,
     executeStake,
     withdraw,
+    // Manual refresh functions
+    refreshStakingData: () => {
+      refetchStakeData();
+      refetchTotalStaked();
+      refetchInterestEarned();
+      refetchBeeBalance();
+    },
     // Transaction states
     isPending: approvePending || stakePending || withdrawPending,
     isConfirming: approveConfirming || stakeConfirming || withdrawConfirming,

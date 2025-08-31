@@ -16,6 +16,7 @@ export default function StakingPage() {
     stake, 
     executeStake, 
     withdraw, 
+    refreshStakingData,
     isPending, 
     isConfirming, 
     isSuccess, 
@@ -24,7 +25,7 @@ export default function StakingPage() {
   } = useStaking();
   const [stakeAmount, setStakeAmount] = useState("");
   const [step, setStep] = useState<"approve" | "stake">("approve");
-  const [countdown, setCountdown] = useState(30);
+  const [countdown, setCountdown] = useState(5);
 
   // Check if user has enough BEE for staking
   const hasEnoughBee = stakingInfo && stakeAmount ? 
@@ -45,20 +46,23 @@ export default function StakingPage() {
     withdraw();
   };
 
-  // 30-second countdown and auto-refresh for interest calculation
+  // 5-second countdown and manual refresh for interest calculation
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
-          // Reset countdown (wagmi will auto-refresh based on refetchInterval)
-          return 30;
+          // Trigger manual refresh when countdown reaches 0
+          refreshStakingData();
+          console.log("⏰ Interest calculation refreshed!");
+          // Reset countdown to 5 seconds
+          return 5;
         }
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [refreshStakingData]);
 
   // Reset after successful transaction
   useEffect(() => {
@@ -66,7 +70,7 @@ export default function StakingPage() {
       setStakeAmount("");
       setStep("approve");
       // Reset countdown to show fresh interest calculation
-      setCountdown(30);
+      setCountdown(5);
       console.log("✅ Staking transaction completed! Data will refresh automatically.");
     }
   }, [isSuccess]);
@@ -115,7 +119,7 @@ export default function StakingPage() {
               <div className="w-full bg-gray-200 rounded-full h-1">
                 <div 
                   className="bg-blue-500 h-1 rounded-full transition-all duration-1000"
-                  style={{ width: `${((30 - countdown) / 30) * 100}%` }}
+                  style={{ width: `${((5 - countdown) / 5) * 100}%` }}
                 ></div>
               </div>
             </div>

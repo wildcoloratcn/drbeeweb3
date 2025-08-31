@@ -140,7 +140,12 @@ export const useNFT = () => {
   useEffect(() => {
     if (approveSuccess) {
       console.log("✅ Approve successful! Refreshing allowance...");
+      // 立即刷新一次
       refetchAllowance();
+      // 延迟再刷新一次，确保区块链状态更新
+      setTimeout(() => {
+        refetchAllowance();
+      }, 2000);
     }
   }, [approveSuccess, refetchAllowance]);
 
@@ -149,6 +154,21 @@ export const useNFT = () => {
   
   // Check if user has enough BEE
   const hasEnoughBee = nftInfo && BigInt(nftInfo.beeBalance) >= BigInt(nftInfo.mintPrice);
+
+  // Debug log for approval state changes
+  useEffect(() => {
+    if (nftInfo) {
+      console.log("🔍 NFT approval state change:", {
+        needsApproval,
+        approveSuccess,
+        allowance: nftInfo.allowance,
+        mintPrice: nftInfo.mintPrice,
+        allowanceBigInt: BigInt(nftInfo.allowance).toString(),
+        mintPriceBigInt: BigInt(nftInfo.mintPrice).toString(),
+        comparison: `${BigInt(nftInfo.allowance)} < ${BigInt(nftInfo.mintPrice)} = ${BigInt(nftInfo.allowance) < BigInt(nftInfo.mintPrice)}`
+      });
+    }
+  }, [needsApproval, approveSuccess, nftInfo?.allowance, nftInfo?.mintPrice]);
 
   const approve = () => {
     if (!address || !nftInfo) return;
