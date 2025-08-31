@@ -6,11 +6,10 @@
 
 <h3>🍯 Complete Web3 DeFi Platform</h3>
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-drbee-dapp.vercel.app-blue?style=for-the-badge)](https://drbee-dapp.vercel.app)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-drbee-dapp.vercel.app-blue?style=for-the-badge)](https://aibee.netlify.app)
 [![Built with Next.js](https://img.shields.io/badge/Built_with-Next.js_15-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
 [![Powered by Ethereum](https://img.shields.io/badge/Powered_by-Ethereum_Sepolia-627EEA?style=for-the-badge&logo=ethereum)](https://ethereum.org)
-
 [![Foundry](https://img.shields.io/badge/Built_with-Foundry-FFF100?style=for-the-badge&logo=ethereum)](https://getfoundry.sh)
 [![OpenZeppelin](https://img.shields.io/badge/Secured_by-OpenZeppelin-4E4E4E?style=for-the-badge)](https://openzeppelin.com)
 [![TailwindCSS](https://img.shields.io/badge/Styled_with-TailwindCSS_4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com)
