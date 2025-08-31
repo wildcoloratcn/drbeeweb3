@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/UI/Card";
 import { Button } from "@/components/UI/Button";
-import { Gift, Image, TrendingUp, Zap, Shield, Users, Coins, ArrowRight, Star } from "lucide-react";
+import { Gift, Image, TrendingUp, Zap, Shield, ArrowRight, Star } from "lucide-react";
 
 export default function Home() {
   return (

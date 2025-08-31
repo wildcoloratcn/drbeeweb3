@@ -248,7 +248,7 @@ export default function VaultPage() {
         <h2 className="text-xl font-semibold mb-4 text-white">💰 Need Gas Fees?</h2>
         <div className="space-y-4">
           <p className="text-gray-300">
-            To claim BEE tokens or mint NFTs, you'll need Sepolia ETH for gas fees.
+            To claim BEE tokens or mint NFTs, you&apos;ll need Sepolia ETH for gas fees.
           </p>
           <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4 backdrop-blur-md">
             <h3 className="font-semibold text-blue-300 mb-2">🚰 Get Free Sepolia ETH</h3>

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ConnectWallet } from "../Common/ConnectWallet";
-import { Coins, Gift, Image, TrendingUp, Info } from "lucide-react";
+import { Gift, Image, TrendingUp, Info } from "lucide-react";
 
 export const Header: React.FC = () => {
   return (

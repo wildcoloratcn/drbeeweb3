@@ -173,7 +173,7 @@ export const useStaking = () => {
     }
   }, [stakeData, totalStaked, interestEarned, beeBalance, lastClaim, cooldown,
       stakeDataLoading, totalStakedLoading, interestEarnedLoading, beeBalanceLoading, 
-      lastClaimLoading, cooldownLoading, address, stakeDataError]);
+      lastClaimLoading, cooldownLoading, address, stakeDataError, calculateVaultInfo]);
 
   // 监听 stake 成功，立即刷新数据
   useEffect(() => {

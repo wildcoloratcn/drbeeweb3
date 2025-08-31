@@ -7,7 +7,7 @@ import { BEE_TOKEN_ABI } from "@/utils/contracts";
 import { CONTRACT_ADDRESSES, CHAIN_ID } from "@/utils/constants";
 
 export const ConnectWallet = () => {
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
 
   // 获取ETH余额
   const { data: ethBalance } = useBalance({

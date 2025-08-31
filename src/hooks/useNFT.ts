@@ -3,7 +3,7 @@ import { useAccount, useReadContract, useWriteContract, useWaitForTransactionRec
 import { NFT_ABI, BEE_TOKEN_ABI } from "@/utils/contracts";
 import { CONTRACT_ADDRESSES, CHAIN_ID } from "@/utils/constants";
 import { NFTInfo } from "@/types";
-import { parseEther } from "viem";
+
 
 export const useNFT = () => {
   const { address } = useAccount();
@@ -83,8 +83,7 @@ export const useNFT = () => {
     writeContract: mintWrite,
     isPending: mintPending,
     data: mintHash,
-    error: mintError,
-    reset: resetMint
+    error: mintError
   } = useWriteContract();
 
   // Wait for transactions
@@ -116,7 +115,7 @@ export const useNFT = () => {
     }
   }, [maxSupply, totalMinted, mintPrice, userBalance, beeBalance, allowance, 
       maxSupplyLoading, totalMintedLoading, mintPriceLoading, userBalanceLoading, 
-      beeBalanceLoading, allowanceLoading, address]);
+      beeBalanceLoading, allowanceLoading, address, nftInfo]);
 
   // 监听 mint 成功，立即刷新数据
   useEffect(() => {

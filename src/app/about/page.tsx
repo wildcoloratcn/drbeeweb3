@@ -80,13 +80,13 @@ export default function AboutPage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <Coins className="w-6 h-6 text-yellow-400" />
-                  <div>
-                    <h4 className="font-semibold text-white">10B BEE Tokens</h4>
-                    <p className="text-gray-300 text-sm">Deflationary mechanism through NFT burns</p>
+                                  <div className="flex items-center space-x-3">
+                    <Coins className="w-6 h-6 text-yellow-400" />
+                    <div>
+                      <h4 className="font-semibold text-white">10B BEE Tokens</h4>
+                      <p className="text-gray-300 text-sm">Deflationary mechanism through NFT burns</p>
+                    </div>
                   </div>
-                </div>
                 <div className="flex items-center space-x-3">
                   <TrendingUp className="w-6 h-6 text-green-400" />
                   <div>
@@ -425,11 +425,11 @@ export default function AboutPage() {
                 <div className="bg-yellow-900/30 border border-yellow-500/50 rounded-lg p-3">
                   <h4 className="font-semibold text-yellow-300 mb-2">📱 MetaMask Instructions</h4>
                   <ol className="text-sm text-yellow-200 space-y-1">
-                    <li>1. Open MetaMask and go to "Assets" tab</li>
-                    <li>2. Click "Import tokens" at the bottom</li>
+                    <li>1. Open MetaMask and go to &quot;Assets&quot; tab</li>
+                    <li>2. Click &quot;Import tokens&quot; at the bottom</li>
                     <li>3. Paste the contract address above</li>
                     <li>4. Symbol and decimals will auto-fill</li>
-                    <li>5. Click "Add Custom Token"</li>
+                    <li>5. Click &quot;Add Custom Token&quot;</li>
                   </ol>
                 </div>
               </div>
@@ -473,11 +473,11 @@ export default function AboutPage() {
                 <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-3">
                   <h4 className="font-semibold text-purple-300 mb-2">🎨 MetaMask NFT Instructions</h4>
                   <ol className="text-sm text-purple-200 space-y-1">
-                    <li>1. Open MetaMask and go to "NFTs" tab</li>
-                    <li>2. Click "Import NFT" at the bottom</li>
+                    <li>1. Open MetaMask and go to &quot;NFTs&quot; tab</li>
+                    <li>2. Click &quot;Import NFT&quot; at the bottom</li>
                     <li>3. Paste the NFT contract address above</li>
                     <li>4. Enter your NFT Token ID (if you own any)</li>
-                    <li>5. Click "Add" to import</li>
+                    <li>5. Click &quot;Add&quot; to import</li>
                   </ol>
                 </div>
               </div>
