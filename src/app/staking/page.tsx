@@ -24,7 +24,6 @@ export default function StakingPage() {
   const [stakeAmount, setStakeAmount] = useState("");
   const [step, setStep] = useState<"approve" | "stake">("approve");
   const [countdown, setCountdown] = useState(30);
-  const [forceRefresh, setForceRefresh] = useState(0);
 
   const handleApprove = () => {
     if (!stakeAmount) return;
@@ -46,9 +45,8 @@ export default function StakingPage() {
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
-          // Trigger refresh of staking info
-          setForceRefresh(Date.now());
-          return 30; // Reset countdown
+          // Reset countdown (wagmi will auto-refresh based on refetchInterval)
+          return 30;
         }
         return prev - 1;
       });
@@ -62,9 +60,8 @@ export default function StakingPage() {
     if (isSuccess) {
       setStakeAmount("");
       setStep("approve");
-      // Reset countdown and trigger immediate refresh
+      // Reset countdown
       setCountdown(30);
-      setForceRefresh(Date.now());
     }
   }, [isSuccess]);
 
@@ -158,7 +155,7 @@ export default function StakingPage() {
               
               {step === "stake" && !approveSuccess && (
                 <div className="text-sm text-gray-600 text-center">
-                  ✅ Approval transaction confirmed. Click "Stake BEE" to complete.
+                  ✅ Approval transaction confirmed. Click &ldquo;Stake BEE&rdquo; to complete.
                 </div>
               )}
             </div>

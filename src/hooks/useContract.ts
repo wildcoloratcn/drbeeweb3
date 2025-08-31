@@ -1,19 +1,18 @@
 import { 
   useReadContract, 
   useWriteContract, 
-  useSimulateContract,
   usePublicClient, 
   useWalletClient 
 } from "wagmi";
-import { getContract } from "viem";
+import { getContract, Abi, PublicClient, WalletClient } from "viem";
 
 // 通用合约 hook，提供读写功能
-export const useContractInteraction = (address: string, abi: any) => {
+export const useContractInteraction = (address: string, abi: Abi) => {
   const publicClient = usePublicClient();
   const { data: walletClient } = useWalletClient();
 
   // 创建合约实例
-  const getContractInstance = (client: any) => {
+  const getContractInstance = (client: PublicClient | WalletClient) => {
     if (!client) return null;
     return getContract({
       address: address as `0x${string}`,
@@ -39,9 +38,9 @@ export const useContractInteraction = (address: string, abi: any) => {
 // 专用的读取 hook
 export const useContractRead = (
   address: string, 
-  abi: any, 
+  abi: Abi, 
   functionName: string, 
-  args?: readonly any[]
+  args?: readonly unknown[]
 ) => {
   return useReadContract({
     address: address as `0x${string}`,
@@ -52,10 +51,10 @@ export const useContractRead = (
 };
 
 // 专用的写入 hook
-export const useContractWrite = (address: string, abi: any) => {
+export const useContractWrite = (address: string, abi: Abi) => {
   const { writeContract, writeContractAsync } = useWriteContract();
   
-  const write = (functionName: string, args?: readonly any[]) => {
+  const write = (functionName: string, args?: readonly unknown[]) => {
     return writeContract({
       address: address as `0x${string}`,
       abi,
@@ -64,7 +63,7 @@ export const useContractWrite = (address: string, abi: any) => {
     });
   };
 
-  const writeAsync = (functionName: string, args?: readonly any[]) => {
+  const writeAsync = (functionName: string, args?: readonly unknown[]) => {
     return writeContractAsync({
       address: address as `0x${string}`,
       abi,

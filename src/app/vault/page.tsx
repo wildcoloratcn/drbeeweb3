@@ -96,7 +96,7 @@ export default function VaultPage() {
                 <br />
                 1. Click the network dropdown
                 <br />
-                2. Select "Sepolia test network"
+                2. Select &ldquo;Sepolia test network&rdquo;
               </p>
             </div>
           </div>

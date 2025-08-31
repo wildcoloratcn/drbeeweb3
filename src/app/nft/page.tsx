@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNFT } from "@/hooks/useNFT";
 import { Card } from "@/components/UI/Card";
 import { Button } from "@/components/UI/Button";
@@ -10,32 +10,10 @@ import { formatEther } from "viem";
 
 export default function NFTPage() {
   const { nftInfo, loading, mint, isPending, isConfirming, isSuccess, error } = useNFT();
-  const [nftImages, setNftImages] = useState<string[]>([]);
 
   const handleMint = () => {
     mint();
   };
-
-  // Load NFT images for user's collection
-  useEffect(() => {
-    const loadNFTImages = async () => {
-      if (!nftInfo || nftInfo.userBalance === 0) {
-        setNftImages([]);
-        return;
-      }
-
-      // For demo purposes, show sample NFT images based on user balance
-      // In a real app, you'd fetch actual tokenIds and their metadata
-      const images = [];
-      for (let i = 1; i <= Math.min(nftInfo.userBalance, 12); i++) {
-        // These would be the actual IPFS image URLs from your metadata
-        images.push(`https://ipfs.io/ipfs/your-hash/images/${i}.png`);
-      }
-      setNftImages(images);
-    };
-
-    loadNFTImages();
-  }, [nftInfo?.userBalance]);
 
   // Reset any local state after successful transaction
   useEffect(() => {
