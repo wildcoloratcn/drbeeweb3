@@ -6,14 +6,16 @@
 
 <h3>🍯 Complete Web3 DeFi Platform</h3>
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-drbee-dapp.vercel.app-blue?style=for-the-badge)](https://aibee.netlify.app)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-aibee.netlify.app-blue?style=for-the-badge)](https://aibee.netlify.app)
 [![Built with Next.js](https://img.shields.io/badge/Built_with-Next.js_15-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
+[![Deployed on Netlify](https://img.shields.io/badge/Deployed_on-Netlify-00C7B7?style=for-the-badge&logo=netlify)](https://netlify.com)
 [![Powered by Ethereum](https://img.shields.io/badge/Powered_by-Ethereum_Sepolia-627EEA?style=for-the-badge&logo=ethereum)](https://ethereum.org)
+
 [![Foundry](https://img.shields.io/badge/Built_with-Foundry-FFF100?style=for-the-badge&logo=ethereum)](https://getfoundry.sh)
 [![OpenZeppelin](https://img.shields.io/badge/Secured_by-OpenZeppelin-4E4E4E?style=for-the-badge)](https://openzeppelin.com)
 [![TailwindCSS](https://img.shields.io/badge/Styled_with-TailwindCSS_4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com)
-[![RainbowKit](https://img.shields.io/badge/Web3-RainbowKit_%2B_Wagmi-FF6B6B?style=for-the-badge)](https://rainbowkit.com)
+[![Wagmi](https://img.shields.io/badge/Web3-Wagmi_%2B_RainbowKit-FF6B6B?style=for-the-badge&logo=ethereum)](https://wagmi.sh)
+[![RainbowKit](https://img.shields.io/badge/Web3_UI-RainbowKit-FF6B6B?style=for-the-badge&logo=ethereum)](https://rainbowkit.com)
 
 ---
 
@@ -24,10 +26,12 @@
 DrBEE aims to establish a self-sustaining blockchain ecosystem where users can participate and earn rewards through multiple pathways:
 - 🍯 **Automated Token Acquisition** - Earn BEE tokens through automated mechanisms
 - 🎨 **NFT Collection & Creation** - Mint unique bee-themed NFTs with rarity mechanics
-- 💰 ****High-Yield Staking** - **80% APY with per-second interest calculation****
+- 💰 **High-Yield Staking** - **80% APY with per-second interest calculation**
 - 🗳️ **Decentralized Governance** - Participate in community decisions and anonymous voting
 - 🎮 **On-Chain Gaming** - Rich gaming ecosystem with tokenized incentives
 - 🎪 **Social Activities** - Host events using tokens and NFTs
+- 🔐 **Privacy Protection** - **Zero-Knowledge Proof (ZKP)** for anonymous voting and private transactions
+- 🤖 **AI Integration** - **LLM Agent** technology for intelligent content generation and user assistance
 
 ## 🔥 Implemented Features
 
@@ -38,12 +42,31 @@ DrBEE aims to establish a self-sustaining blockchain ecosystem where users can p
 - **NFT Marketplace** - Mint unique NFTs by burning BEE tokens (deflationary)
 
 ### 📊 Staking Yield Calculation Formula
+
+<div align="center">
+
+#### 🧮 **Per-Second Interest Calculation Formula**
+![Interest Calculation Formula](./screenshots/interest.png)
+
+#### ⏰ **Real-Time Interest After Time T**
+![Interest After Time T](./screenshots/after_t.png)
+
+</div>
+
+**Mathematical Details:**
 ```
 Annual Percentage Yield = 80% APY
 Per-Second Interest Rate = 80% ÷ (365 × 24 × 3600) = 0.00000002537
 Interest = Principal × Time(seconds) × Per-Second Rate
 Real-Time Compounding = Auto-reinvestment of accrued interest on additional stakes
 ```
+
+**Key Features:**
+- 🚀 **Per-Second Updates**: Interest calculated every second, not daily/monthly
+- 💰 **80% APY**: Industry-leading yield with real-time compounding
+- ⚡ **Instant Rewards**: See your earnings grow in real-time
+- 🔄 **Auto-Compound**: Interest automatically reinvested for maximum growth
+
 
 ### 🎨 NFT Ecosystem
 - **12 Unique Variants** - Each NFT features distinct rarity attributes
