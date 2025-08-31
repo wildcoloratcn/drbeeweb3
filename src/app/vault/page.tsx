@@ -64,11 +64,11 @@ export default function VaultPage() {
     console.log("🔗 Rendering wallet connect screen");
     return (
       <div className="max-w-2xl mx-auto space-y-6">
-        <h1 className="text-3xl font-bold text-center">Daily Claim</h1>
+        <h1 className="text-3xl font-bold text-center text-gradient">Daily Claim</h1>
         <Card>
           <div className="text-center">
-            <h2 className="text-xl font-semibold mb-4">Connect Your Wallet</h2>
-            <p className="text-gray-600 mb-4">Please connect your wallet to claim your daily BEE tokens.</p>
+            <h2 className="text-xl font-semibold mb-4 text-white">Connect Your Wallet</h2>
+            <p className="text-gray-300 mb-4">Please connect your wallet to claim your daily BEE tokens.</p>
             <ConnectWallet />
           </div>
         </Card>
@@ -81,17 +81,17 @@ export default function VaultPage() {
     console.log("🌐 Wrong network, showing switch network screen");
     return (
       <div className="max-w-2xl mx-auto space-y-6">
-        <h1 className="text-3xl font-bold text-center">Daily Claim</h1>
+        <h1 className="text-3xl font-bold text-center text-gradient">Daily Claim</h1>
         <Card>
           <div className="text-center">
-            <h2 className="text-xl font-semibold mb-4">Wrong Network</h2>
-            <p className="text-gray-600 mb-4">
+            <h2 className="text-xl font-semibold mb-4 text-white">Wrong Network</h2>
+            <p className="text-gray-300 mb-4">
               Please switch to Sepolia testnet (Chain ID: {CHAIN_ID}).
               <br />
               Current network: Chain ID {chainId}
             </p>
-            <div className="mt-4 p-4 bg-yellow-100 rounded-lg">
-              <p className="text-sm text-yellow-800">
+            <div className="mt-4 p-4 bg-yellow-900/30 border border-yellow-500/50 rounded-lg backdrop-blur-md">
+              <p className="text-sm text-yellow-200">
                 To switch to Sepolia testnet in MetaMask:
                 <br />
                 1. Click the network dropdown
@@ -118,19 +118,19 @@ export default function VaultPage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <h1 className="text-3xl font-bold text-center">Daily Claim</h1>
+      <h1 className="text-3xl font-bold text-center text-gradient">Daily Claim</h1>
 
       <Card>
-        <h2 className="text-xl font-semibold mb-4">Claim Your Daily BEE</h2>
-        <p className="text-gray-600 mb-2">Claim 100 BEE tokens every 24 hours.</p>
+        <h2 className="text-xl font-semibold mb-4 text-white">Claim Your Daily BEE</h2>
+        <p className="text-gray-300 mb-2">Claim 100 BEE tokens every 24 hours.</p>
 
         {vaultInfo ? (
           <div className="space-y-4">
             <div className="flex justify-between">
-              <span>Next Claim Available:</span>
-              <span>
+              <span className="text-gray-300">Next Claim Available:</span>
+              <span className="text-white font-semibold">
                 {vaultInfo.canClaim ? (
-                  <span className="text-green-600">Now</span>
+                  <span className="text-green-400">Now</span>
                 ) : (
                   new Date(vaultInfo.nextClaimTime).toLocaleString()
                 )}
@@ -149,7 +149,7 @@ export default function VaultPage() {
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="text-center text-gray-500">
+            <div className="text-center text-gray-300">
               Loading vault information...
             </div>
             
@@ -167,8 +167,8 @@ export default function VaultPage() {
       </Card>
 
       <Card>
-        <h2 className="text-xl font-semibold mb-4">How it Works</h2>
-        <ul className="list-disc list-inside text-gray-600 space-y-2">
+        <h2 className="text-xl font-semibold mb-4 text-white">How it Works</h2>
+        <ul className="list-disc list-inside text-gray-300 space-y-2">
           <li>Claim 100 BEE tokens every 24 hours</li>
           <li>If you claim at 2:00 PM today, you can claim again at 2:00 PM tomorrow</li>
           <li>No limit on how many times you can claim</li>

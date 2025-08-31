@@ -85,40 +85,40 @@ export default function StakingPage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <h1 className="text-3xl font-bold text-center">Staking</h1>
+      <h1 className="text-3xl font-bold text-center text-gradient">Stake Your BEE</h1>
 
       <Card>
-        <h2 className="text-xl font-semibold mb-4">Stake Your BEE</h2>
-        <p className="text-gray-600 mb-4">
+        <h2 className="text-xl font-semibold mb-4 text-white">Stake Your BEE</h2>
+        <p className="text-gray-300 mb-4">
           Stake your BEE tokens and earn 80% APY. Interest is calculated per second.
         </p>
 
         {stakingInfo && (
           <div className="space-y-4">
-            <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg border">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-lg">
               <div className="flex justify-between items-center mb-2">
-                <span className="font-semibold">Your BEE Balance:</span>
-                <span className="font-bold text-lg">{formatEther(BigInt(stakingInfo.beeBalance))} BEE</span>
+                <span className="font-semibold text-gray-200">Your BEE Balance:</span>
+                <span className="font-bold text-lg text-white">{formatEther(BigInt(stakingInfo.beeBalance))} BEE</span>
               </div>
               <div className="flex justify-between items-center mb-2">
-                <span className="font-semibold">Your Staked Amount:</span>
-                <span className="font-bold text-lg">{formatEther(BigInt(stakingInfo.stakedAmount))} BEE</span>
+                <span className="font-semibold text-gray-200">Your Staked Amount:</span>
+                <span className="font-bold text-lg text-white">{formatEther(BigInt(stakingInfo.stakedAmount))} BEE</span>
               </div>
               <div className="flex justify-between items-center mb-2">
-                <span className="font-semibold">Interest Earned:</span>
-                <span className="font-bold text-lg text-green-600">
+                <span className="font-semibold text-gray-200">Interest Earned:</span>
+                <span className="font-bold text-lg text-green-400">
                   +{formatEther(BigInt(stakingInfo.interestEarned))} BEE
                 </span>
               </div>
               <div className="flex justify-between items-center mb-3">
-                <span className="text-sm text-gray-600">Interest calculated in:</span>
-                <span className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+                <span className="text-sm text-gray-300">Interest calculated in:</span>
+                <span className="text-sm font-mono bg-white/20 text-white px-2 py-1 rounded">
                   {countdown}s
                 </span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-1">
+              <div className="w-full bg-white/20 rounded-full h-1">
                 <div 
-                  className="bg-blue-500 h-1 rounded-full transition-all duration-1000"
+                  className="bg-blue-400 h-1 rounded-full transition-all duration-1000"
                   style={{ width: `${((5 - countdown) / 5) * 100}%` }}
                 ></div>
               </div>
@@ -126,11 +126,11 @@ export default function StakingPage() {
 
             {/* Vault Information */}
             {stakingInfo.vaultInfo && (
-              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg border">
-                <h3 className="font-semibold text-blue-800 mb-2">💰 Daily Claim Status</h3>
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-lg">
+                <h3 className="font-semibold text-blue-300 mb-2">💰 Daily Claim Status</h3>
                 <div className="flex justify-between items-center mb-1">
-                  <span className="text-sm text-gray-600">Last Claim:</span>
-                  <span className="text-sm font-mono">
+                  <span className="text-sm text-gray-300">Last Claim:</span>
+                  <span className="text-sm font-mono text-gray-200">
                     {stakingInfo.vaultInfo.lastClaimTime > 0 ? 
                       new Date(stakingInfo.vaultInfo.lastClaimTime).toLocaleString() : 
                       "Never"
@@ -138,15 +138,15 @@ export default function StakingPage() {
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Next Claim:</span>
-                  <span className="text-sm font-mono">
+                  <span className="text-sm text-gray-300">Next Claim:</span>
+                  <span className="text-sm font-mono text-gray-200">
                     {stakingInfo.vaultInfo.canClaim ? (
-                      <span className="text-green-600 font-semibold">Available Now!</span>
+                      <span className="text-green-400 font-semibold">Available Now!</span>
                     ) : (
                       <span>
                         {new Date(stakingInfo.vaultInfo.nextClaimTime).toLocaleString()}
                         <br />
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-gray-400">
                           ({Math.ceil(stakingInfo.vaultInfo.timeUntilNextClaim / (1000 * 60 * 60))} hours left)
                         </span>
                       </span>
@@ -157,8 +157,8 @@ export default function StakingPage() {
             )}
             
             <div className="flex justify-between">
-              <span>Total Staked (Platform):</span>
-              <span>{formatEther(BigInt(stakingInfo.totalStaked))} BEE</span>
+              <span className="text-gray-300">Total Staked (Platform):</span>
+              <span className="text-white font-semibold">{formatEther(BigInt(stakingInfo.totalStaked))} BEE</span>
             </div>
 
             <TransactionStatus 
@@ -179,19 +179,19 @@ export default function StakingPage() {
                 value={stakeAmount}
                 onChange={(e) => setStakeAmount(e.target.value)}
                 placeholder="Amount to stake"
-                className={`w-full p-2 border rounded ${!hasEnoughBee && stakeAmount ? 'border-red-300 bg-red-50' : ''}`}
+                className={`w-full p-3 border rounded-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${!hasEnoughBee && stakeAmount ? 'border-red-400 bg-red-900/20' : ''}`}
               />
 
               {!hasEnoughBee && stakeAmount && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-                  <p className="text-red-700 text-sm mb-2">
+                <div className="bg-red-900/30 border border-red-500/50 rounded-lg p-3 backdrop-blur-md">
+                  <p className="text-red-300 text-sm mb-2">
                     ⚠️ Insufficient BEE balance. You need {stakeAmount} BEE but only have {formatEther(BigInt(stakingInfo?.beeBalance || "0"))} BEE.
                   </p>
-                  <p className="text-red-600 text-sm">
+                  <p className="text-red-200 text-sm">
                     💡 Get free BEE tokens: {" "}
                     <Link 
                       href="/vault" 
-                      className="underline font-semibold hover:text-red-800 transition-colors"
+                      className="underline font-semibold hover:text-red-100 transition-colors text-red-200"
                     >
                       Claim 100 BEE daily →
                     </Link>
@@ -229,7 +229,7 @@ export default function StakingPage() {
               )}
               
               {step === "stake" && !approveSuccess && (
-                <div className="text-sm text-gray-600 text-center">
+                <div className="text-sm text-gray-300 text-center">
                   ✅ Approval transaction confirmed. Click &ldquo;Stake BEE&rdquo; to complete.
                 </div>
               )}
@@ -250,8 +250,8 @@ export default function StakingPage() {
       </Card>
 
       <Card>
-        <h2 className="text-xl font-semibold mb-4">Staking Details</h2>
-        <ul className="list-disc list-inside text-gray-600 space-y-2">
+        <h2 className="text-xl font-semibold mb-4 text-white">Staking Details</h2>
+        <ul className="list-disc list-inside text-gray-300 space-y-2">
           <li>80% APY, calculated per second</li>
           <li>No lock-up period, withdraw anytime</li>
           <li>Interest is compounded automatically when you stake more</li>
