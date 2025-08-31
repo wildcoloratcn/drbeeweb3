@@ -1,6 +1,24 @@
 # 🐝 DrBEE - Decentralized Bee Ecosystem
 
-**DrBEE** is a comprehensive Web3 ecosystem built around a bee-themed decentralized application platform, integrating DeFi, NFT, DAO governance, and gaming functionalities. Future roadmap includes the integration of Zero-Knowledge Proof (ZKP) technology, AI capabilities, ecosystem gaming, voting systems, and multiple advanced technological modules.
+<div align="center">
+
+![DrBEE Homepage](./screenshots/aibee_homepage.png)
+
+<h3>🍯 Complete Web3 DeFi Platform</h3>
+
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-drbee-dapp.vercel.app-blue?style=for-the-badge)](https://drbee-dapp.vercel.app)
+[![Built with Next.js](https://img.shields.io/badge/Built_with-Next.js_15-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
+[![Powered by Ethereum](https://img.shields.io/badge/Powered_by-Ethereum_Sepolia-627EEA?style=for-the-badge&logo=ethereum)](https://ethereum.org)
+
+[![Foundry](https://img.shields.io/badge/Built_with-Foundry-FFF100?style=for-the-badge&logo=ethereum)](https://getfoundry.sh)
+[![OpenZeppelin](https://img.shields.io/badge/Secured_by-OpenZeppelin-4E4E4E?style=for-the-badge)](https://openzeppelin.com)
+[![TailwindCSS](https://img.shields.io/badge/Styled_with-TailwindCSS_4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com)
+[![RainbowKit](https://img.shields.io/badge/Web3-RainbowKit_%2B_Wagmi-FF6B6B?style=for-the-badge)](https://rainbowkit.com)
+
+---
+
+</div>
 
 ## 🌟 Vision Statement
 
@@ -48,6 +66,21 @@ Real-Time Compounding = Auto-reinvestment of accrued interest on additional stak
 - **RainbowKit + Wagmi** - Web3 integration suite
 - **Viem** - Ethereum interaction library
 
+## 📱 Application Screenshots
+
+<div align="center">
+
+### 🏠 Homepage - Complete Web3 Ecosystem Overview
+![DrBEE Homepage](./screenshots/aibee_homepage.png)
+
+### 🎨 NFT Minting - Unique Bee-Themed Collections
+![DrBEE NFT](./screenshots/aibee_NFT.png)
+
+### 💰 Staking - 80% APY with Real-Time Interest
+![DrBEE Staking](./screenshots/aibee_Staking.png)
+
+</div>
+
 ## 📦 Quick Start
 
 ### Prerequisites
@@ -86,6 +119,11 @@ Vault:         0x1c852498880ff2711a62541C4A36AE8dDEC6dfE9
 BeeStaking:    0x7C12D5a404867F9E265FbB6947aC46592B226451
 DrBEE NFT:     0xA6C0E968cCF8DB76eEDe84Bf3d62151c999208BD
 ```
+
+[![Contract on Etherscan](https://img.shields.io/badge/📄_BEE_Token-Etherscan-21325B?style=for-the-badge)](https://sepolia.etherscan.io/address/0x2011551065B37D6762D7401ebBaa39adc4eED0e7)
+[![Contract on Etherscan](https://img.shields.io/badge/📄_Vault-Etherscan-21325B?style=for-the-badge)](https://sepolia.etherscan.io/address/0x1c852498880ff2711a62541C4A36AE8dDEC6dfE9)
+[![Contract on Etherscan](https://img.shields.io/badge/📄_BeeStaking-Etherscan-21325B?style=for-the-badge)](https://sepolia.etherscan.io/address/0x7C12D5a404867F9E265FbB6947aC46592B226451)
+[![Contract on Etherscan](https://img.shields.io/badge/📄_DrBEE_NFT-Etherscan-21325B?style=for-the-badge)](https://sepolia.etherscan.io/address/0xA6C0E968cCF8DB76eEDe84Bf3d62151c999208BD)
 
 ## 🛣️ Development Roadmap
 
@@ -160,10 +198,19 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 📞 Community & Support
 
-- TBA
+- **GitHub Issues**: [Report bugs or request features](https://github.com/yourusername/drbee-dapp/issues)
+- **Discord**: [Join our community](https://discord.gg/drbee) *(Coming Soon)*
+- **Twitter**: [Follow for updates](https://twitter.com/drbee_ecosystem) *(Coming Soon)*
 
 ---
+
+<div align="center">
 
 **🐝 Join the Hive, Earn the Honey! 🍯**
 
 *DrBEE - Empowering everyone through blockchain technology*
+
+[![Star on GitHub](https://img.shields.io/badge/⭐_Star_on_GitHub-000000?style=for-the-badge&logo=github)](https://github.com/yourusername/drbee-dapp)
+[![Fork on GitHub](https://img.shields.io/badge/🍴_Fork_on_GitHub-000000?style=for-the-badge&logo=github)](https://github.com/yourusername/drbee-dapp/fork)
+
+</div>

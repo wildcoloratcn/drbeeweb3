@@ -243,6 +243,33 @@ export default function VaultPage() {
         </ul>
       </Card>
 
+      {/* Gas Fee Helper */}
+      <Card>
+        <h2 className="text-xl font-semibold mb-4 text-white">💰 Need Gas Fees?</h2>
+        <div className="space-y-4">
+          <p className="text-gray-300">
+            To claim BEE tokens or mint NFTs, you'll need Sepolia ETH for gas fees.
+          </p>
+          <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4 backdrop-blur-md">
+            <h3 className="font-semibold text-blue-300 mb-2">🚰 Get Free Sepolia ETH</h3>
+            <p className="text-blue-200 text-sm mb-3">
+              Use Google Cloud's official faucet to get free Sepolia ETH for testing:
+            </p>
+            <a 
+              href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
+            >
+              Get Sepolia ETH →
+            </a>
+          </div>
+          <div className="text-sm text-gray-400">
+            <p>💡 <strong>Tip:</strong> You only need a small amount (0.001 ETH) for multiple transactions</p>
+          </div>
+        </div>
+      </Card>
+
 
     </div>
   );

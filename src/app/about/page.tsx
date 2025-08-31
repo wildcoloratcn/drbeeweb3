@@ -1,5 +1,4 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/UI/Card";
-import { Badge } from "@/components/UI/Badge";
 import { 
   Coins, 
   TrendingUp, 
@@ -181,7 +180,7 @@ export default function AboutPage() {
                 <div className="p-4 bg-white/5 rounded-lg backdrop-blur-md">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold text-white">BEE Token</h4>
-                    <Badge variant="secondary">ERC-20</Badge>
+                    <span className="px-2 py-1 bg-yellow-600/30 text-yellow-200 text-xs rounded">ERC-20</span>
                   </div>
                   <p className="text-sm text-gray-400 font-mono break-all">
                     0x2011551065B37D6762D7401ebBaa39adc4eED0e7
@@ -190,7 +189,7 @@ export default function AboutPage() {
                 <div className="p-4 bg-white/5 rounded-lg backdrop-blur-md">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold text-white">DrBEE NFT</h4>
-                    <Badge variant="secondary">ERC-721</Badge>
+                    <span className="px-2 py-1 bg-purple-600/30 text-purple-200 text-xs rounded">ERC-721</span>
                   </div>
                   <p className="text-sm text-gray-400 font-mono break-all">
                     0xA6C0E968cCF8DB76eEDe84Bf3d62151c999208BD
@@ -201,7 +200,7 @@ export default function AboutPage() {
                 <div className="p-4 bg-white/5 rounded-lg backdrop-blur-md">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold text-white">Vault (Faucet)</h4>
-                    <Badge variant="secondary">Contract</Badge>
+                    <span className="px-2 py-1 bg-blue-600/30 text-blue-200 text-xs rounded">Contract</span>
                   </div>
                   <p className="text-sm text-gray-400 font-mono break-all">
                     0x1c852498880ff2711a62541C4A36AE8dDEC6dfE9
@@ -210,7 +209,7 @@ export default function AboutPage() {
                 <div className="p-4 bg-white/5 rounded-lg backdrop-blur-md">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold text-white">BeeStaking</h4>
-                    <Badge variant="secondary">Contract</Badge>
+                    <span className="px-2 py-1 bg-green-600/30 text-green-200 text-xs rounded">Contract</span>
                   </div>
                   <p className="text-sm text-gray-400 font-mono break-all">
                     0x7C12D5a404867F9E265FbB6947aC46592B226451
@@ -369,6 +368,136 @@ export default function AboutPage() {
                   <span className="text-white font-semibold">OpenZeppelin</span>
                 </div>
               </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Wallet Import Guide */}
+      <section className="max-w-4xl mx-auto">
+        <Card>
+          <CardHeader className="text-center">
+            <CardTitle className="text-3xl text-gradient">👛 Add Tokens to Your Wallet</CardTitle>
+            <CardDescription>
+              Import BEE tokens and DrBEE NFTs to view them in MetaMask or other wallets
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* BEE Token Import */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-white flex items-center">
+                  <Coins className="w-6 h-6 text-yellow-400 mr-2" />
+                  Import BEE Token
+                </h3>
+                <div className="bg-white/5 rounded-lg p-4 space-y-3">
+                  <div className="space-y-2">
+                    <label className="text-sm text-gray-400">Contract Address</label>
+                    <div className="flex items-center space-x-2">
+                      <input 
+                        type="text" 
+                        value="0x2011551065B37D6762D7401ebBaa39adc4eED0e7"
+                        readOnly
+                        className="flex-1 p-2 bg-white/10 border border-white/20 rounded text-white font-mono text-sm"
+                      />
+                      <button 
+                        onClick={() => navigator.clipboard.writeText("0x2011551065B37D6762D7401ebBaa39adc4eED0e7")}
+                        className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
+                      >
+                        Copy
+                      </button>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span className="text-gray-400">Symbol:</span>
+                      <span className="text-white ml-2 font-semibold">BEE</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-400">Decimals:</span>
+                      <span className="text-white ml-2 font-semibold">18</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-yellow-900/30 border border-yellow-500/50 rounded-lg p-3">
+                  <h4 className="font-semibold text-yellow-300 mb-2">📱 MetaMask Instructions</h4>
+                  <ol className="text-sm text-yellow-200 space-y-1">
+                    <li>1. Open MetaMask and go to "Assets" tab</li>
+                    <li>2. Click "Import tokens" at the bottom</li>
+                    <li>3. Paste the contract address above</li>
+                    <li>4. Symbol and decimals will auto-fill</li>
+                    <li>5. Click "Add Custom Token"</li>
+                  </ol>
+                </div>
+              </div>
+
+              {/* NFT Import */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-white flex items-center">
+                  <Image className="w-6 h-6 text-purple-400 mr-2" />
+                  Import DrBEE NFTs
+                </h3>
+                <div className="bg-white/5 rounded-lg p-4 space-y-3">
+                  <div className="space-y-2">
+                    <label className="text-sm text-gray-400">NFT Contract Address</label>
+                    <div className="flex items-center space-x-2">
+                      <input 
+                        type="text" 
+                        value="0xA6C0E968cCF8DB76eEDe84Bf3d62151c999208BD"
+                        readOnly
+                        className="flex-1 p-2 bg-white/10 border border-white/20 rounded text-white font-mono text-sm"
+                      />
+                      <button 
+                        onClick={() => navigator.clipboard.writeText("0xA6C0E968cCF8DB76eEDe84Bf3d62151c999208BD")}
+                        className="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded transition-colors"
+                      >
+                        Copy
+                      </button>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span className="text-gray-400">Standard:</span>
+                      <span className="text-white ml-2 font-semibold">ERC-721</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-400">Collection:</span>
+                      <span className="text-white ml-2 font-semibold">DrBEE</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-3">
+                  <h4 className="font-semibold text-purple-300 mb-2">🎨 MetaMask NFT Instructions</h4>
+                  <ol className="text-sm text-purple-200 space-y-1">
+                    <li>1. Open MetaMask and go to "NFTs" tab</li>
+                    <li>2. Click "Import NFT" at the bottom</li>
+                    <li>3. Paste the NFT contract address above</li>
+                    <li>4. Enter your NFT Token ID (if you own any)</li>
+                    <li>5. Click "Add" to import</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            {/* Gas Fee Helper */}
+            <div className="mt-8 bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
+              <h3 className="font-semibold text-blue-300 mb-2 flex items-center">
+                <Zap className="w-5 h-5 mr-2" />
+                Need Gas Fees?
+              </h3>
+              <p className="text-blue-200 text-sm mb-3">
+                All transactions require Sepolia ETH for gas fees. Get free test ETH from:
+              </p>
+              <a 
+                href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
+              >
+                Google Cloud Sepolia Faucet →
+              </a>
             </div>
           </CardContent>
         </Card>

@@ -60,32 +60,8 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Link href="/vault">
-                <Button variant="outline" className="w-full group-hover:purple-gradient-hover group-hover:text-white transition-all">
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold transition-all">
                   Claim Now
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          {/* Staking Card - Put staking in middle to highlight */}
-          <Card className="group hover:glow-purple transition-all duration-300 border-purple-500/30">
-            <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-4">
-                <TrendingUp className="w-6 h-6 text-white" />
-              </div>
-              <CardTitle className="text-xl">
-                <span className="text-yellow-400">80% APY</span> Staking
-              </CardTitle>
-              <CardDescription>
-                <span className="text-green-400 font-semibold">Per-second interest</span> calculation<br/>
-                Flexible withdrawal • Auto-compound
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link href="/staking">
-                <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-semibold">
-                  Start Staking
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
@@ -106,8 +82,32 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Link href="/nft">
-                <Button variant="outline" className="w-full group-hover:purple-gradient-hover group-hover:text-white transition-all">
+                <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold transition-all">
                   Mint NFT
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          {/* Staking Card - Put staking in middle to highlight */}
+          <Card className="group hover:glow-purple transition-all duration-300 border-purple-500/30">
+            <CardHeader>
+              <div className="w-12 h-12 purple-gradient rounded-lg flex items-center justify-center mb-4">
+                <TrendingUp className="w-6 h-6 text-white" />
+              </div>
+              <CardTitle className="text-xl">
+                <span className="text-yellow-400">80% APY</span> Staking
+              </CardTitle>
+              <CardDescription>
+                <span className="text-green-400 font-semibold">Per-second interest</span> calculation<br/>
+                Flexible withdrawal • Auto-compound
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/staking">
+                <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold">
+                  Start Staking
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
