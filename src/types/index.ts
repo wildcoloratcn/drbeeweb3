@@ -4,6 +4,8 @@ export interface VaultInfo {
     lastClaim: number;
     canClaim: boolean;
     nextClaimTime: number;
+    lastClaimTime: number; // 毫秒时间戳，用于显示
+    timeUntilNextClaim: number; // 距离下次领取的毫秒数
   }
   
   export interface StakingInfo {

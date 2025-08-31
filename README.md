@@ -64,6 +64,21 @@ npm install
 npm run dev
 ```
 
+### Configuration (Optional)
+For better reliability, you can configure a custom RPC endpoint by setting the `SEPOLIA_RPC_URL` environment variable:
+
+```bash
+# Create .env.local file
+echo "SEPOLIA_RPC_URL=https://your-sepolia-rpc-url" > .env.local
+```
+
+**Recommended free RPC providers:**
+- [Alchemy](https://www.alchemy.com/) - `https://eth-sepolia.g.alchemy.com/v2/YOUR_API_KEY`
+- [Infura](https://infura.io/) - `https://sepolia.infura.io/v3/YOUR_PROJECT_ID`
+- [QuickNode](https://www.quicknode.com/) - Various endpoints available
+
+*Note: The app uses multiple fallback RPC endpoints by default, so custom configuration is optional.*
+
 ### Deployed Contract Addresses (Sepolia Testnet)
 ```
 BEE Token:     0x2011551065B37D6762D7401ebBaa39adc4eED0e7
@@ -141,13 +156,11 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [Technical Documentation](./packages/contracts/README.md)
 - [Product Requirements Document](./prd.md)
 - [Smart Contract Source Code](./packages/contracts/src/)
-- [Frontend Interface Demo](http://localhost:3000)
+
 
 ## 📞 Community & Support
 
-- Project Discussion: [GitHub Issues](https://github.com/your-repo/drbee-dapp/issues)
-- Community Hub: [Discord](https://discord.gg/drbee)
-- Technical Support: [Telegram](https://t.me/drbee_support)
+- TBA
 
 ---
 

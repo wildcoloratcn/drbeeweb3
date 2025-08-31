@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAccount, useChainId } from "wagmi";
 import { useVault } from "@/hooks/useVault";
 import { Card } from "@/components/UI/Card";
@@ -16,6 +16,7 @@ export default function VaultPage() {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { vaultInfo, loading, claim, isPending, isSuccess, error } = useVault();
+  const [refreshCountdown, setRefreshCountdown] = useState(10); // 10秒刷新一次倒计时
 
   console.log("🚀 VaultPage render:", {
     address,
@@ -38,6 +39,21 @@ export default function VaultPage() {
       }, 2000);
     }
   }, [isSuccess]);
+
+  // 10秒倒计时定时器，用于刷新剩余时间显示
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRefreshCountdown((prev) => {
+        if (prev <= 1) {
+          // 重新计算时间，但不刷新整个页面，只是重新渲染组件
+          return 10;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const handleClaim = () => {
     console.log("🎯 Claim button clicked!"); // 调试日志
@@ -126,15 +142,67 @@ export default function VaultPage() {
 
         {vaultInfo ? (
           <div className="space-y-4">
-            <div className="flex justify-between">
-              <span className="text-gray-300">Next Claim Available:</span>
-              <span className="text-white font-semibold">
-                {vaultInfo.canClaim ? (
-                  <span className="text-green-400">Now</span>
-                ) : (
-                  new Date(vaultInfo.nextClaimTime).toLocaleString()
+            {/* Daily Claim Status */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-lg">
+              <h3 className="font-semibold text-blue-300 mb-3">💰 Daily Claim Status</h3>
+              
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-300">Last Claim:</span>
+                  <span className="text-sm font-mono text-gray-200">
+                    {vaultInfo.lastClaimTime > 0 ? 
+                      new Date(vaultInfo.lastClaimTime).toLocaleString() : 
+                      "Never"
+                    }
+                  </span>
+                </div>
+                
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-300">Next Claim Available:</span>
+                  <span className="text-sm font-mono text-gray-200">
+                    {vaultInfo.canClaim ? (
+                      <span className="text-green-400 font-semibold">Available Now! 🎉</span>
+                    ) : (
+                      <div className="text-right">
+                        <div>{new Date(vaultInfo.nextClaimTime).toLocaleString()}</div>
+                        <div className="text-xs text-gray-400">
+                          ({Math.ceil(vaultInfo.timeUntilNextClaim / (1000 * 60 * 60))} hours left)
+                        </div>
+                      </div>
+                    )}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-300">Claim Amount:</span>
+                  <span className="text-sm font-semibold text-yellow-400">100 BEE</span>
+                </div>
+
+                {/* Progress bar for next claim */}
+                {!vaultInfo.canClaim && vaultInfo.timeUntilNextClaim && (
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-xs text-gray-400">
+                      <span>Time until next claim</span>
+                      <div className="text-right">
+                        <div>
+                          {Math.floor(vaultInfo.timeUntilNextClaim / (1000 * 60 * 60))}h {Math.floor((vaultInfo.timeUntilNextClaim % (1000 * 60 * 60)) / (1000 * 60))}m
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          Updates in {refreshCountdown}s
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full transition-all duration-300"
+                        style={{ 
+                          width: `${Math.max(0, Math.min(100, 100 - (vaultInfo.timeUntilNextClaim / (24 * 60 * 60 * 1000)) * 100))}%` 
+                        }}
+                      ></div>
+                    </div>
+                  </div>
                 )}
-              </span>
+              </div>
             </div>
 
             <TransactionStatus status={getTxStatus()} message={getErrorMessage()} />
@@ -144,7 +212,7 @@ export default function VaultPage() {
               disabled={!vaultInfo.canClaim || isPending}
               className="w-full"
             >
-              {isPending ? "Claiming..." : isSuccess ? "Claimed!" : "Claim 100 BEE"}
+              {isPending ? "Claiming..." : isSuccess ? "Claimed!" : vaultInfo.canClaim ? "🎁 Claim 100 BEE" : "⏰ Claim Not Available"}
             </Button>
           </div>
         ) : (

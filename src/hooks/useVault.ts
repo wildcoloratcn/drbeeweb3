@@ -94,6 +94,7 @@ export const useVault = () => {
       const lastClaimTime = Number(lastClaim) * 1000;
       const nextClaimTime = lastClaimTime + Number(cooldown) * 1000;
       const canClaim = lastClaimTime === 0 || Date.now() >= nextClaimTime;
+      const timeUntilNextClaim = canClaim ? 0 : Math.max(0, nextClaimTime - Date.now());
 
       console.log("💰 Vault info updated:", {
         claimAmount: claimAmount?.toString() || "0",
@@ -101,6 +102,8 @@ export const useVault = () => {
         lastClaim: Number(lastClaim),
         canClaim,
         nextClaimTime,
+        lastClaimTime,
+        timeUntilNextClaim,
       });
 
       setVaultInfo({
@@ -109,6 +112,8 @@ export const useVault = () => {
         lastClaim: Number(lastClaim),
         canClaim,
         nextClaimTime,
+        lastClaimTime,
+        timeUntilNextClaim,
       });
       setLoading(false);
       console.log("🚫 Loading set to false");

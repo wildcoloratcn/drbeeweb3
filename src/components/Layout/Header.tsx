@@ -1,24 +1,50 @@
 import React from "react";
 import Link from "next/link";
 import { ConnectWallet } from "../Common/ConnectWallet";
+import { Coins, Gift, Image, TrendingUp, Zap, Info } from "lucide-react";
 
 export const Header: React.FC = () => {
   return (
-    <header className="bg-white shadow-sm">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-yellow-600">
-          DrBEE
+    <header className="glass-card mx-4 mt-4 mb-8 glow-purple">
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <Link href="/" className="flex items-center space-x-3">
+          <div className="relative">
+            <div className="w-10 h-10 purple-gradient rounded-full flex items-center justify-center">
+              <Zap className="w-6 h-6 text-white" />
+            </div>
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
+          </div>
+          <span className="text-2xl font-bold text-gradient">DrBEE</span>
         </Link>
         
-        <nav className="hidden md:flex space-x-6">
-          <Link href="/vault" className="text-gray-700 hover:text-yellow-600">
-            Daily Claim
+        <nav className="hidden md:flex space-x-2">
+          <Link 
+            href="/vault" 
+            className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+          >
+            <Gift className="w-4 h-4" />
+            <span>Daily Claim</span>
           </Link>
-          <Link href="/nft" className="text-gray-700 hover:text-yellow-600">
-            NFT Minting
+          <Link 
+            href="/nft" 
+            className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+          >
+            <Image className="w-4 h-4" />
+            <span>NFT Minting</span>
           </Link>
-          <Link href="/staking" className="text-gray-700 hover:text-yellow-600">
-            Staking
+          <Link 
+            href="/staking" 
+            className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+          >
+            <TrendingUp className="w-4 h-4" />
+            <span>Staking</span>
+          </Link>
+          <Link 
+            href="/about" 
+            className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+          >
+            <Info className="w-4 h-4" />
+            <span>About</span>
           </Link>
         </nav>
         

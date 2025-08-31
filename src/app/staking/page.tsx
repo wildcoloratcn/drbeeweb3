@@ -27,18 +27,19 @@ export default function StakingPage() {
   const [step, setStep] = useState<"approve" | "stake">("approve");
   const [countdown, setCountdown] = useState(5);
 
-  // Check if user has enough BEE for staking
-  const hasEnoughBee = stakingInfo && stakeAmount ? 
-    BigInt(stakingInfo.beeBalance) >= parseEther(stakeAmount) : true;
+  // Check if stake amount is valid and user has enough BEE
+  const isValidAmount = stakeAmount && !isNaN(Number(stakeAmount)) && Number(stakeAmount) > 0;
+  const hasEnoughBee = stakingInfo && isValidAmount ? 
+    BigInt(stakingInfo.beeBalance) >= parseEther(stakeAmount) : false;
 
   const handleApprove = () => {
-    if (!stakeAmount) return;
+    if (!isValidAmount || !hasEnoughBee) return;
     stake(stakeAmount);
     setStep("stake");
   };
 
   const handleExecuteStake = () => {
-    if (!stakeAmount) return;
+    if (!isValidAmount || !hasEnoughBee) return;
     executeStake(stakeAmount);
   };
 
@@ -75,6 +76,13 @@ export default function StakingPage() {
     }
   }, [isSuccess]);
 
+  // Reset step if amount becomes invalid
+  useEffect(() => {
+    if (step === "stake" && (!isValidAmount || !hasEnoughBee)) {
+      setStep("approve");
+    }
+  }, [isValidAmount, hasEnoughBee, step]);
+
   if (loading) {
     return (
       <div className="max-w-2xl mx-auto">
@@ -90,7 +98,7 @@ export default function StakingPage() {
       <Card>
         <h2 className="text-xl font-semibold mb-4 text-white">Stake Your BEE</h2>
         <p className="text-gray-300 mb-4">
-          Stake your BEE tokens and earn 80% APY. Interest is calculated per second.
+          Stake your BEE tokens and earn 80% APY. Interest is <span className="font-bold text-red-500">calculated per second</span>. Withdraw anytime.
         </p>
 
         {stakingInfo && (
@@ -124,37 +132,7 @@ export default function StakingPage() {
               </div>
             </div>
 
-            {/* Vault Information */}
-            {stakingInfo.vaultInfo && (
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-lg">
-                <h3 className="font-semibold text-blue-300 mb-2">💰 Daily Claim Status</h3>
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-sm text-gray-300">Last Claim:</span>
-                  <span className="text-sm font-mono text-gray-200">
-                    {stakingInfo.vaultInfo.lastClaimTime > 0 ? 
-                      new Date(stakingInfo.vaultInfo.lastClaimTime).toLocaleString() : 
-                      "Never"
-                    }
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-300">Next Claim:</span>
-                  <span className="text-sm font-mono text-gray-200">
-                    {stakingInfo.vaultInfo.canClaim ? (
-                      <span className="text-green-400 font-semibold">Available Now!</span>
-                    ) : (
-                      <span>
-                        {new Date(stakingInfo.vaultInfo.nextClaimTime).toLocaleString()}
-                        <br />
-                        <span className="text-xs text-gray-400">
-                          ({Math.ceil(stakingInfo.vaultInfo.timeUntilNextClaim / (1000 * 60 * 60))} hours left)
-                        </span>
-                      </span>
-                    )}
-                  </span>
-                </div>
-              </div>
-            )}
+
             
             <div className="flex justify-between">
               <span className="text-gray-300">Total Staked (Platform):</span>
@@ -179,13 +157,25 @@ export default function StakingPage() {
                 value={stakeAmount}
                 onChange={(e) => setStakeAmount(e.target.value)}
                 placeholder="Amount to stake"
-                className={`w-full p-3 border rounded-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${!hasEnoughBee && stakeAmount ? 'border-red-400 bg-red-900/20' : ''}`}
+                className={`w-full p-3 border rounded-lg bg-white/10 backdrop-blur-md border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                  stakeAmount && (!isValidAmount || !hasEnoughBee) ? 'border-red-400 bg-red-900/20' : ''
+                }`}
               />
 
-              {!hasEnoughBee && stakeAmount && (
+              {/* Invalid amount error */}
+              {stakeAmount && !isValidAmount && (
+                <div className="bg-red-900/30 border border-red-500/50 rounded-lg p-3 backdrop-blur-md">
+                  <p className="text-red-300 text-sm">
+                    ⚠️ Invalid amount. Please enter a positive number greater than 0.
+                  </p>
+                </div>
+              )}
+
+              {/* Insufficient balance error */}
+              {isValidAmount && !hasEnoughBee && stakingInfo && (
                 <div className="bg-red-900/30 border border-red-500/50 rounded-lg p-3 backdrop-blur-md">
                   <p className="text-red-300 text-sm mb-2">
-                    ⚠️ Insufficient BEE balance. You need {stakeAmount} BEE but only have {formatEther(BigInt(stakingInfo?.beeBalance || "0"))} BEE.
+                    ⚠️ Insufficient BEE balance. You need {stakeAmount} BEE but only have {formatEther(BigInt(stakingInfo.beeBalance))} BEE.
                   </p>
                   <p className="text-red-200 text-sm">
                     💡 Get free BEE tokens: {" "}
@@ -199,38 +189,38 @@ export default function StakingPage() {
                 </div>
               )}
               
-              {step === "approve" && hasEnoughBee && (
+              {step === "approve" && isValidAmount && hasEnoughBee && (
                 <Button 
                   onClick={handleApprove} 
-                  disabled={!stakeAmount || isPending || isConfirming} 
+                  disabled={isPending || isConfirming} 
                   className="w-full"
                 >
                   {isPending ? "Approving..." : "1. Approve BEE"}
                 </Button>
               )}
 
-              {step === "approve" && !hasEnoughBee && stakeAmount && (
+              {step === "approve" && stakeAmount && (!isValidAmount || !hasEnoughBee) && (
                 <Button 
                   disabled={true}
                   className="w-full opacity-50 cursor-not-allowed"
                 >
-                  Insufficient BEE Balance
+                  {!isValidAmount ? "Invalid Amount" : "Insufficient BEE Balance"}
                 </Button>
               )}
 
-              {step === "stake" && approveSuccess && hasEnoughBee && (
+              {step === "stake" && approveSuccess && isValidAmount && hasEnoughBee && (
                 <Button 
                   onClick={handleExecuteStake} 
-                  disabled={!stakeAmount || isPending || isConfirming} 
+                  disabled={isPending || isConfirming} 
                   className="w-full"
                 >
                   {isPending ? "Staking..." : "2. Stake BEE"}
                 </Button>
               )}
               
-              {step === "stake" && !approveSuccess && (
+              {step === "stake" && !approveSuccess && isValidAmount && hasEnoughBee && (
                 <div className="text-sm text-gray-300 text-center">
-                  ✅ Approval transaction confirmed. Click &ldquo;Stake BEE&rdquo; to complete.
+                  ✅ Please confirm approval using your wallet. Click &ldquo;Stake BEE&rdquo; to complete.
                 </div>
               )}
             </div>
