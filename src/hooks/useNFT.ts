@@ -115,7 +115,7 @@ export const useNFT = () => {
     }
   }, [maxSupply, totalMinted, mintPrice, userBalance, beeBalance, allowance, 
       maxSupplyLoading, totalMintedLoading, mintPriceLoading, userBalanceLoading, 
-      beeBalanceLoading, allowanceLoading, address, nftInfo]);
+      beeBalanceLoading, allowanceLoading, address]);
 
   // 监听 mint 成功，立即刷新数据
   useEffect(() => {
@@ -167,7 +167,7 @@ export const useNFT = () => {
         comparison: `${BigInt(nftInfo.allowance)} < ${BigInt(nftInfo.mintPrice)} = ${BigInt(nftInfo.allowance) < BigInt(nftInfo.mintPrice)}`
       });
     }
-  }, [needsApproval, approveSuccess, nftInfo?.allowance, nftInfo?.mintPrice]);
+  }, [needsApproval, approveSuccess, nftInfo]);
 
   const approve = () => {
     if (!address || !nftInfo) return;

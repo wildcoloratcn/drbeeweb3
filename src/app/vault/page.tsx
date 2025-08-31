@@ -253,7 +253,7 @@ export default function VaultPage() {
           <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4 backdrop-blur-md">
             <h3 className="font-semibold text-blue-300 mb-2">🚰 Get Free Sepolia ETH</h3>
             <p className="text-blue-200 text-sm mb-3">
-              Use Google Cloud's official faucet to get free Sepolia ETH for testing:
+              Use Google Cloud&apos;s official faucet to get free Sepolia ETH for testing:
             </p>
             <a 
               href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia"

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { STAKING_ABI, BEE_TOKEN_ABI, VAULT_ABI } from "@/utils/contracts";
 import { CONTRACT_ADDRESSES, CHAIN_ID } from "@/utils/constants";
@@ -130,7 +130,7 @@ export const useStaking = () => {
   });
 
   // Calculate vault info
-  const calculateVaultInfo = () => {
+  const calculateVaultInfo = useCallback(() => {
     if (!lastClaim || !cooldown) return null;
     
     const lastClaimTime = Number(lastClaim) * 1000; // Convert to milliseconds
@@ -145,7 +145,7 @@ export const useStaking = () => {
       canClaim,
       timeUntilNextClaim: canClaim ? 0 : Math.max(0, nextClaimTime - now),
     };
-  };
+  }, [lastClaim, cooldown]);
 
   // Update staking info when data changes
   useEffect(() => {

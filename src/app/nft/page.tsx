@@ -53,7 +53,7 @@ export default function NFTPage() {
       // 初始化时记录余额
       setPreviousUserBalance(0);
     }
-  }, [nftInfo?.userBalance]);
+  }, [nftInfo?.userBalance, nftInfo, previousUserBalance]);
 
   // 监听 mint 成功状态
   useEffect(() => {
