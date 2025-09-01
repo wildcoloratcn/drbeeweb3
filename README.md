@@ -1,5 +1,10 @@
 # 🐝 DrBEE - Decentralized Bee Ecosystem
 
+> ⚠️ **Testnet Environment Notice**  
+> This is a demonstration project deployed on **Ethereum Sepolia Testnet**. All tokens (BEE), NFTs, and transactions use test ETH with no real monetary value. This platform is designed for learning, testing, and showcasing Web3 DeFi capabilities in a safe environment.
+> 
+> 🚀 **Future Mainnet Migration**: Once comprehensive security audits, feature completeness, and ecosystem maturity are achieved, the project will migrate to Ethereum Mainnet for full production deployment.
+
 <div align="center">
 
 <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1)); padding: 20px; border-radius: 15px; border: 1px solid rgba(139, 92, 246, 0.2);">
